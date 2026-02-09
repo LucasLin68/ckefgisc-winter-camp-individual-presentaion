@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle AI機器人</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+    <h2>Wordle 猜字機器人</h2>
+    
+    <div class="chat-box">
+        {% if not history %}
+            <p style="color: #666; text-align: center;">請輸入一個 5 個字母的單字開始遊戲！</p>
+        {% endif %}
+
+        {% for attempt in history %}
+            <div class="msg-row">
+                {% for i in range(5) %}
+                    <span class="letter-box {{ attempt.result[i] }}">
+                        {{ attempt.word[i] }}
+                    </span>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <form method="POST" class="input-area">
+        <input type="text" 
+               name="user_input" 
+               placeholder="輸入 5 個字母..." 
+               minlength="5"
+               maxlength="5" 
+               required 
+               pattern="[A-Za-z]{5}"
+               title="請輸入剛好 5 個英文字母"
+               autocomplete="off"
+               autofocus>
+        <button type="submit">發送</button>
+    </form>
+    <div class="status-message">
+        {% if status == 'won' %}
+            <h3 style="color: #4caf50;">🎉 太強了！你猜對了！</h3>
+            <div id="confetti-trigger"></div> {% elif status == 'lost' %}
+            <h3 style="color: #f44336;">👻 可惜！答案是：{{ target }}</h3>
+        {% endif %}
+    </div>
+
+    {% if status == 'playing' %}
+    <form method="POST" class="input-area">
+        </form>
+    {% else %}
+    <div style="text-align: center;">
+        <p>遊戲已結束</p>
+    </div>
+    {% endif %}
+
+    <div class="footer">
+        <a href="/reset" class="reset-link">重新開始新遊戲</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

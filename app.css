@@ -1,0 +1,96 @@
+/* 基本版面設定 */
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    max-width: 500px; 
+    margin: 50px auto; 
+    padding: 20px; 
+    background-color: #f0f2f5; 
+}
+
+h2 { text-align: center; color: #333; }
+
+/* 聊天框/遊戲區域 */
+.chat-box { 
+    background: white; 
+    padding: 30px 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    min-height: 300px; 
+    max-height: 450px; 
+    overflow-y: auto; 
+    margin-bottom: 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 每一列猜測 */
+.msg-row { 
+    margin-bottom: 10px; 
+    display: flex;
+    gap: 5px;
+}
+
+/* 字母方塊基礎樣式 */
+.letter-box {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+    text-transform: uppercase;
+    border: 2px solid #ddd;
+    color: #333; /* 預設文字顏色 */
+}
+
+/* 顏色狀態：這會覆蓋預設樣式 */
+.correct { background-color: #6aaa64; border-color: #6aaa64; color: white; } /* 綠 */
+.present { background-color: #c9b458; border-color: #c9b458; color: white; } /* 黃 */
+.absent  { background-color: #787c7e; border-color: #787c7e; color: white; } /* 灰 */
+
+/* 輸入區域 */
+.input-area { display: flex; gap: 10px; }
+input { 
+    flex-grow: 1; 
+    padding: 12px; 
+    border: 2px solid #ddd; 
+    border-radius: 8px; 
+    font-size: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+input:focus { border-color: #4caf50; outline: none; }
+
+button { 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    background: #4caf50; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    font-weight: bold;
+}
+button:disabled { background: #ccc; }
+
+.footer { text-align: center; margin-top: 15px; }
+.reset-link { color: #888; text-decoration: none; font-size: 0.9em; }
+.reset-link:hover { text-decoration: underline; }
+
+.status-message {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: bounce 1s ease infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
+}
+
+input[name="user_input"] {
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
